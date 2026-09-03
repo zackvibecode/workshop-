@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Reveal from "./Reveal";
 import { PROJECTS } from "@/lib/data";
 
@@ -13,7 +14,7 @@ function ProjectCard({
 }) {
   return (
     <Reveal delay={delay}>
-      <div className="group block cursor-pointer">
+      <Link href={`/work/${p.slug}`} className="group block">
         <div className={`img-reveal relative ${aspect} rounded-2xl`}>
           <Image
             src={p.img}
@@ -38,7 +39,7 @@ function ProjectCard({
             </h3>
           </div>
         </div>
-      </div>
+      </Link>
     </Reveal>
   );
 }
