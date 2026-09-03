@@ -2,12 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PROJECTS, WA_LINK } from "@/lib/data";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import Reveal from "@/components/Reveal";
 
 export async function generateStaticParams() {
-  return PROJECTS.map((project) => ({
-    slug: project.slug,
-  }));
+  return PROJECTS.map((project) => ({ slug: project.slug }));
 }
 
 export default async function ProjectDetailPage({
@@ -22,152 +23,91 @@ export default async function ProjectDetailPage({
     notFound();
   }
 
-  const relatedProjects = PROJECTS.filter((p) => p.slug !== project.slug).slice(0, 3);
+  const related = PROJECTS.filter((p) => p.slug !== project.slug).slice(0, 3);
 
   return (
-    <main className="bg-white">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[500px] bg-ink">
-        <Image
-          src={project.img}
-          alt={project.title}
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent" />
-        
-        {/* Back Button */}
-        <div className="absolute left-0 right-0 top-0 z-10">
-          <div className="mx-auto max-w-[1360px] px-5 py-8 sm:px-8">
-            <Link
-              href="/#work"
-              className="group inline-flex items-center gap-2 text-sm font-bold text-white transition-all hover:gap-3"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-              >
-                <path d="M19 12H5M5 12l7 7M5 12l7-7" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span>BACK TO PROJECTS</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Title Overlay */}
-        <div className="absolute inset-x-0 bottom-0 z-10">
-          <div className="mx-auto max-w-[1360px] px-5 pb-12 sm:px-8 md:pb-16">
-            <Reveal>
-              <p className="eyebrow eyebrow-accent mb-3 text-white/80">
-                {project.type.toUpperCase()}
-              </p>
-              <h1 className="h-display text-5xl text-white md:text-6xl lg:text-7xl">
-                {project.title}
-              </h1>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Project Details */}
-      <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-[1360px] px-5 sm:px-8">
-          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            {/* Description */}
-            <div className="lg:col-span-7">
-              <Reveal>
-                <h2 className="h-display mb-6 text-3xl text-ink md:text-4xl">
-                  Project Overview
-                </h2>
-                <p className="text-lg leading-relaxed text-grey">
-                  {project.description}
-                </p>
-              </Reveal>
-
-              {/* Image Gallery */}
-              <div className="mt-12 space-y-6">
-                {project.gallery.map((img, idx) => (
-                  <Reveal key={idx} delay={idx * 100}>
-                    <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
-                      <Image
-                        src={img}
-                        alt={`${project.title} - Image ${idx + 1}`}
-                        fill
-                        className="object-cover transition-transform duration-700 hover:scale-105"
-                        sizes="(max-width: 1024px) 100vw, 60vw"
-                      />
-                    </div>
-                  </Reveal>
-                ))}
+    <>
+      <Navbar />
+      <main className="bg-white">
+        {/* Hero */}
+        <section className="relative">
+          <div className="relative h-[72svh] min-h-[32rem] w-full overflow-hidden">
+            <Image
+              src={project.img}
+              alt={`${project.title} — ${project.type}`}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/40" />
+            <div className="absolute inset-0 flex items-end">
+              <div className="mx-auto w-full max-w-[1360px] px-5 pb-16 sm:px-8 md:pb-20">
+                <Reveal>
+                  <p className="eyebrow text-accent">{project.type.toUpperCase()}</p>
+                  <h1 className="h-display mt-4 text-5xl text-white sm:text-6xl md:text-7xl">
+                    {project.title}
+                  </h1>
+                </Reveal>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Sidebar - Project Details */}
-            <div className="lg:col-span-5">
-              <div className="sticky top-8">
+        {/* Overview */}
+        <section className="py-20 md:py-28">
+          <div className="mx-auto max-w-[1360px] px-5 sm:px-8">
+            <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-7">
+                <Reveal>
+                  <p className="eyebrow eyebrow-accent">Project Overview</p>
+                  <h2 className="h-display mt-4 text-4xl text-ink sm:text-5xl">
+                    THE TRANSFORMATION
+                  </h2>
+                  <p className="mt-6 max-w-xl text-base leading-relaxed text-grey">
+                    A premium {project.type.toLowerCase()} executed with precision
+                    and attention to detail. ZAQONE transformed this{" "}
+                    {project.title} with high-quality materials and clean finishing,
+                    delivering a result that stands out on the road.
+                  </p>
+                </Reveal>
+
+                <Reveal delay={120}>
+                  <div className="mt-8 flex flex-wrap items-center gap-4">
+                    <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="btn btn-accent">
+                      Start Your Project <span className="arr">→</span>
+                    </a>
+                    <Link href="/#work" className="link-arrow">
+                      Back to Projects
+                    </Link>
+                  </div>
+                </Reveal>
+              </div>
+
+              <div className="lg:col-span-5">
                 <Reveal delay={100}>
                   <div className="rounded-2xl bg-soft p-8 md:p-10">
-                    <h3 className="mb-6 font-heading text-xl font-bold text-ink">
+                    <h3 className="font-heading text-xl font-bold text-ink">
                       Project Details
                     </h3>
-                    
-                    <div className="space-y-5">
+                    <dl className="mt-6 space-y-5">
                       <div>
-                        <p className="mb-1 text-xs font-bold uppercase tracking-wider text-grey">
-                          Vehicle
-                        </p>
-                        <p className="font-heading text-base font-semibold text-ink">
-                          {project.details.vehicle}
-                        </p>
+                        <dt className="font-heading text-[11px] font-bold tracking-[0.25em] text-grey">
+                          VEHICLE
+                        </dt>
+                        <dd className="mt-1 font-heading text-base font-semibold text-ink">
+                          {project.title}
+                        </dd>
                       </div>
-
                       <div>
-                        <p className="mb-1 text-xs font-bold uppercase tracking-wider text-grey">
-                          Service
-                        </p>
-                        <p className="font-heading text-base font-semibold text-ink">
-                          {project.details.service}
-                        </p>
+                        <dt className="font-heading text-[11px] font-bold tracking-[0.25em] text-grey">
+                          SERVICE
+                        </dt>
+                        <dd className="mt-1 font-heading text-base font-semibold text-ink">
+                          {project.type}
+                        </dd>
                       </div>
-
-                      <div>
-                        <p className="mb-1 text-xs font-bold uppercase tracking-wider text-grey">
-                          Material
-                        </p>
-                        <p className="font-heading text-base font-semibold text-ink">
-                          {project.details.material}
-                        </p>
-                      </div>
-
-                      <div>
-                        <p className="mb-1 text-xs font-bold uppercase tracking-wider text-grey">
-                          Duration
-                        </p>
-                        <p className="font-heading text-base font-semibold text-ink">
-                          {project.details.duration}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="mt-8 border-t border-line pt-8">
-                      <p className="mb-3 text-xs font-bold uppercase tracking-wider text-grey">
-                        Features
-                      </p>
-                      <ul className="space-y-2">
-                        {project.details.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-sm text-grey">
-                            <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent" />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
+                    </dl>
                     <div className="mt-8">
                       <a
                         href={WA_LINK}
@@ -175,8 +115,7 @@ export default async function ProjectDetailPage({
                         rel="noopener noreferrer"
                         className="btn btn-dark w-full justify-center"
                       >
-                        <span>Get A Quote</span>
-                        <span className="arr">→</span>
+                        Get a Quote <span className="arr">→</span>
                       </a>
                     </div>
                   </div>
@@ -184,56 +123,51 @@ export default async function ProjectDetailPage({
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Related Projects */}
-      {relatedProjects.length > 0 && (
-        <section className="border-t border-line bg-soft py-16 md:py-24">
-          <div className="mx-auto max-w-[1360px] px-5 sm:px-8">
-            <Reveal>
-              <p className="eyebrow eyebrow-accent mb-4">More Projects</p>
-              <h2 className="h-display mb-12 text-4xl text-ink md:text-5xl">
-                RELATED WORK
-              </h2>
-            </Reveal>
-
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {relatedProjects.map((proj, idx) => (
-                <Reveal key={proj.slug} delay={idx * 100}>
-                  <Link href={`/work/${proj.slug}`} className="group block">
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-                      <Image
-                        src={proj.img}
-                        alt={proj.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-95" />
-                      
-                      <span className="absolute right-5 top-5 grid h-11 w-11 translate-y-1 place-items-center rounded-full bg-white text-ink opacity-0 shadow-lift transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <path d="M7 17 17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </span>
-
-                      <div className="absolute inset-x-0 bottom-0 p-6">
-                        <p className="mb-1 text-xs font-bold uppercase tracking-wider text-white/70">
-                          {proj.type}
-                        </p>
-                        <h3 className="font-heading text-xl font-bold text-white">
-                          {proj.title}
-                        </h3>
-                      </div>
-                    </div>
-                  </Link>
-                </Reveal>
-              ))}
-            </div>
-          </div>
         </section>
-      )}
-    </main>
+
+        {/* Related Work */}
+        {related.length > 0 && (
+          <section className="bg-soft py-20 md:py-28">
+            <div className="mx-auto max-w-[1360px] px-5 sm:px-8">
+              <Reveal>
+                <p className="eyebrow eyebrow-accent">More Work</p>
+                <h2 className="h-display mt-4 text-4xl text-ink sm:text-5xl">
+                  OTHER PROJECTS
+                </h2>
+              </Reveal>
+
+              <div className="mt-12 grid gap-6 md:grid-cols-3">
+                {related.map((r, i) => (
+                  <Reveal key={r.slug} delay={i * 100}>
+                    <Link href={`/work/${r.slug}`} className="group block">
+                      <div className="img-reveal relative aspect-[4/3] rounded-2xl">
+                        <Image
+                          src={r.img}
+                          alt={`${r.title} — ${r.type}`}
+                          fill
+                          sizes="(max-width:768px) 100vw, 33vw"
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-95" />
+                        <div className="absolute inset-x-0 bottom-0 p-6">
+                          <p className="font-heading text-[11px] font-bold tracking-[0.25em] text-white/65">
+                            {r.type.toUpperCase()}
+                          </p>
+                          <h3 className="mt-1.5 font-heading text-xl font-bold text-white">
+                            {r.title}
+                          </h3>
+                        </div>
+                      </div>
+                    </Link>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+      </main>
+      <Footer />
+      <FloatingWhatsApp />
+    </>
   );
 }

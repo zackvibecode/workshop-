@@ -1,23 +1,6 @@
-"use client";
-
 import Image from "next/image";
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
 import Reveal from "./Reveal";
 import { WA_LINK } from "@/lib/data";
-
-// Dynamic import for 3D component (client-side only)
-const Car3D = dynamic(() => import("./Car3D"), {
-  ssr: false,
-  loading: () => (
-    <div className="flex h-full w-full items-center justify-center bg-ink">
-      <div className="text-center">
-        <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-accent border-t-transparent" />
-        <p className="text-sm text-white/60">Loading 3D Experience...</p>
-      </div>
-    </div>
-  ),
-});
 
 const MARQUEE = [
   "VEHICLE WRAP",
@@ -30,29 +13,17 @@ const MARQUEE = [
 export default function Hero() {
   return (
     <section id="top" className="relative">
-      {/* cinematic full-bleed visual with 3D car */}
-      <div className="relative h-[100svh] min-h-[36rem] w-full overflow-hidden bg-ink">
-        {/* 3D Car Scene */}
-        <div className="absolute inset-0">
-          <Suspense
-            fallback={
-              <Image
-                src="/images/hero-main.jpg"
-                alt="Premium wrapped vehicle — ZAQONE"
-                fill
-                priority
-                sizes="100vw"
-                className="object-cover"
-              />
-            }
-          >
-            <Car3D />
-          </Suspense>
-        </div>
-        
-        {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+      {/* cinematic full-bleed visual */}
+      <div className="relative h-[100svh] min-h-[36rem] w-full overflow-hidden">
+        <Image
+          src="/images/hero-main.jpg"
+          alt="Premium wrapped vehicle — ZAQONE"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/40" />
 
         {/* copy */}
         <div className="absolute inset-0 flex items-end md:items-center">

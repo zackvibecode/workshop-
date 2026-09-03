@@ -15,26 +15,8 @@ export const PROJECTS = [
     title: "BMW M4 Competition",
     type: "Full Vehicle Wrap",
     img: "/images/proj-bmw.jpg",
-    size: "hero",
+    size: "hero", // large feature
     slug: "bmw-m4-competition",
-    description: "A stunning transformation of the BMW M4 Competition featuring a premium full vehicle wrap. This project showcases our expertise in applying high-quality vinyl wraps that enhance the vehicle's aggressive styling while providing paint protection.",
-    details: {
-      vehicle: "BMW M4 Competition",
-      service: "Full Vehicle Wrap",
-      material: "Premium 3M Vinyl Wrap",
-      duration: "3-4 Days",
-      features: [
-        "Complete colour transformation",
-        "Paint protection",
-        "Premium finish quality",
-        "Professional installation",
-      ],
-    },
-    gallery: [
-      "/images/proj-bmw.jpg",
-      "/images/proj-bmw.jpg",
-      "/images/proj-bmw.jpg",
-    ],
   },
   {
     title: "Toyota GR86",
@@ -42,24 +24,6 @@ export const PROJECTS = [
     img: "/images/proj-gr86.jpg",
     size: "std",
     slug: "toyota-gr86-custom",
-    description: "Custom racing graphics designed specifically for this Toyota GR86. The design combines aggressive lines with subtle details, creating a unique look that stands out on the road and track.",
-    details: {
-      vehicle: "Toyota GR86",
-      service: "Custom Graphics Design & Application",
-      material: "High-Performance Vinyl Graphics",
-      duration: "2-3 Days",
-      features: [
-        "Bespoke design consultation",
-        "Race-inspired graphics",
-        "Precision application",
-        "Durable outdoor-rated vinyl",
-      ],
-    },
-    gallery: [
-      "/images/proj-gr86.jpg",
-      "/images/proj-gr86.jpg",
-      "/images/proj-gr86.jpg",
-    ],
   },
   {
     title: "Commercial Fleet",
@@ -67,24 +31,6 @@ export const PROJECTS = [
     img: "/images/proj-fleet.jpg",
     size: "std",
     slug: "commercial-fleet-branding",
-    description: "Complete branding solution for a commercial fleet, transforming company vehicles into powerful mobile advertisements. Strategic design and placement ensures maximum visibility and brand impact.",
-    details: {
-      vehicle: "Commercial Fleet Vehicles",
-      service: "Fleet Branding & Graphics",
-      material: "Commercial-Grade Vinyl",
-      duration: "1-2 Days per vehicle",
-      features: [
-        "Brand consistency across fleet",
-        "High-visibility design",
-        "Weather-resistant materials",
-        "Fast turnaround time",
-      ],
-    },
-    gallery: [
-      "/images/proj-fleet.jpg",
-      "/images/proj-fleet.jpg",
-      "/images/proj-fleet.jpg",
-    ],
   },
   {
     title: "Mercedes-Benz C-Class",
@@ -92,24 +38,6 @@ export const PROJECTS = [
     img: "/images/proj-merc.jpg",
     size: "wide",
     slug: "mercedes-c-class-wrap",
-    description: "Luxury meets performance with this Mercedes-Benz C-Class premium wrap. Featuring a sophisticated finish that complements the vehicle's elegant lines while adding a personal touch.",
-    details: {
-      vehicle: "Mercedes-Benz C-Class",
-      service: "Premium Vehicle Wrap",
-      material: "Premium Vinyl with Satin Finish",
-      duration: "3-4 Days",
-      features: [
-        "Luxury finish quality",
-        "Colour customization",
-        "Paint protection",
-        "Seamless application",
-      ],
-    },
-    gallery: [
-      "/images/proj-merc.jpg",
-      "/images/proj-merc.jpg",
-      "/images/proj-merc.jpg",
-    ],
   },
 ];
 

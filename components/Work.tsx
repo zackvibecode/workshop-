@@ -14,7 +14,7 @@ function ProjectCard({
 }) {
   return (
     <Reveal delay={delay}>
-      <Link href={`/work/${p.slug}`} className="group block">
+      <Link href={`/work/${p.slug}`} className="group block cursor-pointer">
         <div className={`img-reveal relative ${aspect} rounded-2xl`}>
           <Image
             src={p.img}
